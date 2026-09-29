@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EMPSEB 32 — Rogla, Slovenia, 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFF1E7;
+    --ink:#1E2A22;
+    --forest:#2F4A3B;
+    --ochre:#8A6415;
+    --stone:#5C6259;
+    --line:#CDD1C0;
+    --white:#FBFBF8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+  }
+  h1,h2,h3,.serif{font-family:'Newsreader',serif;font-weight:500}
+  a{color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+  section{padding:88px 0}
+  section + section{border-top:1px solid var(--line)}
+
+  /* nav */
+  header{
+    position:sticky;top:0;z-index:10;
+    background:rgba(239,241,231,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 28px}
+  .brand{font-family:'Newsreader',serif;font-style:italic;font-size:20px}
+  .navlinks{display:flex;gap:28px;list-style:none;font-size:15px}
+  .navlinks a{text-decoration:none;color:var(--stone);border-bottom:1px solid transparent;padding-bottom:2px}
+  .navlinks a:hover,.navlinks a:focus-visible{color:var(--forest);border-color:var(--forest)}
+  .navtoggle{display:none;background:none;border:1px solid var(--line);border-radius:4px;padding:6px 10px;font-size:15px;cursor:pointer}
+
+  /* hero */
+  .hero{padding:96px 0 80px;position:relative;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end}
+  .hero p.lead{color:var(--stone);font-size:16px;max-width:34ch;margin-bottom:18px}
+  .hero h1{font-size:clamp(52px,9vw,96px);line-height:.98;letter-spacing:-.01em}
+  .hero .when{font-family:'Newsreader',serif;font-style:italic;color:var(--ochre);font-size:22px;margin-top:18px}
+  .hero .blurb{margin-top:28px;max-width:52ch;font-size:16.5px}
+  .hero .cta{margin-top:34px;display:flex;gap:16px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:12px 22px;border-radius:2px;
+    text-decoration:none;font-size:15px;font-weight:500;
+    border:1px solid var(--forest);
+  }
+  .btn.solid{background:var(--forest);color:var(--white)}
+  .btn.solid:hover{background:#243b2f}
+  .btn.ghost{color:var(--forest)}
+  .btn.ghost:hover{background:rgba(47,74,59,.07)}
+  .treeart{align-self:stretch;min-height:220px}
+  .treeart svg{width:100%;height:100%}
+
+  /* headings */
+  .kicker{color:var(--ochre);font-size:15px;font-family:'Newsreader',serif;font-style:italic;margin-bottom:10px}
+  h2{font-size:34px;margin-bottom:22px}
+  .lede{color:var(--stone);max-width:60ch;margin-bottom:38px;font-size:16.5px}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:56px}
+  .facts{border-top:1px solid var(--line)}
+  .facts dl{display:grid;grid-template-columns:1fr auto;gap:14px 18px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .facts dt{color:var(--stone);font-size:15px}
+  .facts dd{font-weight:500;text-align:right}
+
+  /* program */
+  .days{border-top:1px solid var(--line)}
+  .day{display:grid;grid-template-columns:64px 140px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .day .num{font-family:'Newsreader',serif;font-style:italic;color:var(--ochre);font-size:20px}
+  .day .date{color:var(--stone);font-size:14.5px}
+  .day h3{font-size:18px;font-weight:500;margin-bottom:4px}
+  .day p{color:var(--stone);font-size:15px}
+
+  /* abstracts */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .card h3{font-size:20px;margin-bottom:10px}
+  .card p{color:var(--stone);font-size:15.5px;margin-bottom:14px}
+  .card ul{list-style:none;margin-bottom:18px}
+  .card li{padding:7px 0;border-top:1px solid var(--line);font-size:15px}
+  .note{font-size:13.5px;color:var(--stone);font-style:italic}
+
+  /* venue */
+  .venue-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .venue-grid h3{font-size:18px;margin:22px 0 8px}
+  .venue-grid h3:first-child{margin-top:0}
+  .venue-grid p{color:var(--stone);font-size:15.5px}
+
+  /* committee */
+  .committee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .member{background:var(--paper);padding:22px}
+  .member .role{color:var(--ochre);font-size:13.5px;font-family:'Newsreader',serif;font-style:italic;margin-bottom:6px}
+  .member .name{font-weight:500}
+
+  /* sponsors */
+  .sponsor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .slogo{background:var(--white);min-height:90px;display:flex;align-items:center;justify-content:center;color:var(--stone);font-size:13px}
+
+  footer{padding:56px 0;border-top:1px solid var(--line)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:14.5px;color:var(--stone)}
+  footer a{text-decoration:underline}
+
+  @media (max-width:820px){
+    .navlinks{position:fixed;inset:64px 0 auto 0;background:var(--paper);flex-direction:column;padding:20px 28px;border-bottom:1px solid var(--line);display:none}
+    .navlinks.open{display:flex}
+    .navtoggle{display:block}
+    .hero .wrap{grid-template-columns:1fr}
+    .treeart{display:none}
+    .about-grid,.two-col,.venue-grid{grid-template-columns:1fr}
+    .committee-grid{grid-template-columns:repeat(2,1fr)}
+    .sponsor-grid{grid-template-columns:repeat(2,1fr)}
+    .day{grid-template-columns:40px 1fr;row-gap:4px}
+    .day .date{grid-column:2}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">EMPSEB 32</div>
+    <button class="navtoggle" aria-expanded="false" aria-controls="navlinks" onclick="const l=document.getElementById('navlinks');const open=l.classList.toggle('open');this.setAttribute('aria-expanded',open)">Menu</button>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#abstracts">Abstracts</a></li>
+      <li><a href="#venue">Venue</a></li>
+      <li><a href="#committee">Committee</a></li>
+      <li><a href="#sponsors">Sponsors</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="lead">The 32nd European Meeting of PhD Students in Evolutionary Biology</p>
+      <h1>EMPSEB<br>32</h1>
+      <p class="when">31 May – 4 June 2027 · Rogla, Slovenia</p>
+      <p class="blurb">Once a year, PhD students working on evolutionary biology leave their labs and field sites to spend a week presenting their work, arguing about phylogenies late into the night, and hiking between talks. In 2027, we meet on the Pohorje plateau — organised by PhD students, for PhD students, since 1995.</p>
+      <div class="cta">
+        <a class="btn solid" href="#abstracts">Submit an abstract</a>
+        <a class="btn ghost" href="#abstracts">Register</a>
+      </div>
+    </div>
+    <div class="treeart" aria-hidden="true">
+      <svg viewBox="0 0 260 240" fill="none">
+        <g stroke="#2F4A3B" stroke-width="1.4" stroke-linecap="round">
+          <path d="M20 220 L20 40"/>
+          <path d="M20 190 L70 170"/>
+          <path d="M70 170 L70 120"/>
+          <path d="M70 120 L110 95"/>
+          <path d="M70 120 L110 150"/>
+          <path d="M110 95 L150 70"/>
+          <path d="M110 95 L150 110"/>
+          <path d="M110 150 L150 135"/>
+          <path d="M110 150 L150 170"/>
+          <path d="M20 130 L70 100"/>
+          <path d="M70 100 L110 60"/>
+          <path d="M70 100 L110 75"/>
+          <path d="M20 60 L60 45"/>
+        </g>
+        <g fill="#8A6415">
+          <circle cx="150" cy="70" r="3"/>
+          <circle cx="150" cy="110" r="3"/>
+          <circle cx="150" cy="135" r="3"/>
+          <circle cx="150" cy="170" r="3"/>
+          <circle cx="110" cy="75" r="3"/>
+          <circle cx="60" cy="45" r="3"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <p class="kicker">Since 1995</p>
+      <h2>An annual meeting, run by the students attending it</h2>
+      <p class="lede">EMPSEB is organised independently each year by current PhD students in the host country, and supported by the European Society for Evolutionary Biology (ESEB). It moves to a different European setting every year, and has never had a fixed home.</p>
+      <p style="max-width:58ch;color:var(--stone)">The meeting brings together around 80–100 doctoral researchers working across every branch of evolutionary biology — from genomics to behaviour to macroevolution — to present their own research to an audience of peers, without the pressure of presenting to a room of senior faculty. Alongside the student talks and posters, 8–10 invited senior scientists give plenary lectures, run workshops, and share what they've learned about building a career in research.</p>
+    </div>
+    <div class="facts">
+      <dl>
+        <dt>Format</dt><dd>Talks, posters, workshops</dd>
+      </dl>
+      <dl>
+        <dt>Participants</dt><dd>~90</dd>
+      </dl>
+      <dl>
+        <dt>Invited speakers</dt><dd>8–10 senior scientists</dd>
+      </dl>
+      <dl>
+        <dt>Supported by</dt><dd>ESEB</dd>
+      </dl>
+      <dl>
+        <dt>Running since</dt><dd>1995, Zurich</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="program">
+  <div class="wrap">
+    <p class="kicker">31 May – 4 June 2027</p>
+    <h2>Five days on the mountain</h2>
+    <p class="lede">A mix of talks, posters, workshops, and time outdoors on the Pohorje plateau. The full timetable, with speaker names and talk titles, will be posted closer to the meeting.</p>
+    <div class="days">
+      <div class="day">
+        <div class="num">I</div>
+        <div class="date">Mon 31 May</div>
+        <div><h3>Arrival & welcome</h3><p>Check-in at Rogla, welcome reception, icebreaker.</p></div>
+      </div>
+      <div class="day">
+        <div class="num">II</div>
+        <div class="date">Tue 1 June</div>
+        <div><h3>Talks I & poster session</h3><p>Student talks through the day, plenary lecture, evening poster session.</p></div>
+      </div>
+      <div class="day">
+        <div class="num">III</div>
+        <div class="date">Wed 2 June</div>
+        <div><h3>Talks II & workshops</h3><p>More student talks, career and methods workshops, discussion groups.</p></div>
+      </div>
+      <div class="day">
+        <div class="num">IV</div>
+        <div class="date">Thu 3 June</div>
+        <div><h3>Excursion day</h3><p>Guided hike through the Pohorje forest, free afternoon, conference dinner.</p></div>
+      </div>
+      <div class="day">
+        <div class="num">V</div>
+        <div class="date">Fri 4 June</div>
+        <div><h3>Talks III & closing</h3><p>Final session, closing remarks, departures.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="abstracts">
+  <div class="wrap">
+    <p class="kicker">Get involved</p>
+    <h2>Abstracts & registration</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>Submitting an abstract</h3>
+        <p>Every participant is invited to submit an abstract for either a talk or a poster — on any topic in evolutionary biology, at any stage of completion. This is a room of fellow PhD students, so early or unfinished work is very welcome.</p>
+        <ul>
+          <li>Abstract length: max. 250 words</li>
+          <li>Format: talk or poster, your choice</li>
+          <li>Deadline: to be announced</li>
+        </ul>
+        <a class="btn solid" href="mailto:empseb32@example.org">Submit an abstract</a>
+        <p class="note" style="margin-top:12px">Submission form goes live once the deadline is confirmed.</p>
+      </div>
+      <div class="card">
+        <h3>Registration</h3>
+        <p>The registration fee covers accommodation on-site, all meals, the excursion day, and the conference dinner. Spaces are limited to around 90 participants, so early registration is recommended.</p>
+        <ul>
+          <li>Fee: to be announced</li>
+          <li>Includes: accommodation, meals, excursion</li>
+          <li>Capacity: ~90 participants</li>
+        </ul>
+        <a class="btn ghost" href="mailto:empseb32@example.org">Register interest</a>
+        <p class="note" style="margin-top:12px">Full registration opens alongside the abstract deadline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="venue">
+  <div class="wrap">
+    <p class="kicker">Pohorje, Slovenia</p>
+    <h2>Venue & travel</h2>
+    <div class="venue-grid">
+      <div>
+        <h3>Rogla</h3>
+        <p>Rogla is a mountain plateau in the Pohorje range in eastern Slovenia, sitting at around 1,500 m among dense spruce forest. It's a quiet, self-contained setting — walking trails leave straight from the accommodation, and there's little to distract from the science (or the forest air).</p>
+        <h3>Accommodation</h3>
+        <p>All participants stay on-site for the duration of the meeting, within walking distance of the talk and poster rooms. Rooms are shared, in keeping with EMPSEB tradition.</p>
+      </div>
+      <div>
+        <h3>Getting there</h3>
+        <p>Nearest airports are Maribor (~45 min drive), Ljubljana (~1.5 hr), and Graz, Austria (~1.5 hr). A shuttle will run from Maribor and Ljubljana on the arrival day — details to follow closer to the meeting.</p>
+        <h3>What to bring</h3>
+        <p>Layers and sturdy shoes — late May in the mountains can mean sun, rain, or both in the same afternoon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="committee">
+  <div class="wrap">
+    <p class="kicker">Organised by PhD students</p>
+    <h2>Organizing committee</h2>
+    <p class="lede">EMPSEB 32 is organised by a team of doctoral researchers in Slovenia. Reach out to any of us with questions.</p>
+    <div class="committee-grid">
+      <div class="member"><p class="role">Chair</p><p class="name">Name Surname</p></div>
+      <div class="member"><p class="role">Programme</p><p class="name">Name Surname</p></div>
+      <div class="member"><p class="role">Logistics</p><p class="name">Name Surname</p></div>
+      <div class="member"><p class="role">Communications</p><p class="name">Name Surname</p></div>
+      <div class="member"><p class="role">Finance</p><p class="name">Name Surname</p></div>
+      <div class="member"><p class="role">Sponsorship</p><p class="name">Name Surname</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="sponsors">
+  <div class="wrap">
+    <p class="kicker">Thank you</p>
+    <h2>Sponsors & support</h2>
+    <p class="lede">EMPSEB 32 is supported by the European Society for Evolutionary Biology (ESEB). We're grateful to the institutions and organisations that help make this meeting possible.</p>
+    <div class="sponsor-grid">
+      <div class="slogo">ESEB</div>
+      <div class="slogo">Your logo here</div>
+      <div class="slogo">Your logo here</div>
+      <div class="slogo">Your logo here</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>EMPSEB 32 · Rogla, Slovenia · 31 May – 4 June 2027</div>
+    <div><a href="mailto:empseb32@example.org">empseb32@example.org</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
